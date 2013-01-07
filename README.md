@@ -2,7 +2,7 @@
 
 middleware to validate parameters
 
-# example
+## example
 
 ```javascript
 var veto = require('veto');
