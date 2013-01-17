@@ -21,6 +21,9 @@ app.get('/', function(req, res, next) {
     // will throw a veto.ValidationError if it isn't
     req.assert('email').isEmail();
 
+    // asserts can be chained
+    req.assert('foo').isAlpha().len(4, 10);
+
     // we can be sure email is of email format
 });
 
@@ -78,5 +81,29 @@ app.use(veto(additional));
 
 app.get('/', function(req, res) {
     req.assert('foo').isFooBar();
+});
+```
+
+## capturing errors
+
+Veto asserts throw. This means that the error handler middleware will be called as soon as a veto fails. You can easily handle the error there and send any relevant response back to the user.
+
+```javascript
+app.use(veto());
+
+app.get('/', function(req, res) {
+    req.assert('foo').isEmail();
+});
+
+// error handler for failed assertions
+app.use(function(err, req, res, next) {
+    // veto errors are of instance veto.ValidationError
+    // err.statusCode is 400
+    // err.param is the name of the parameter that failed
+    // err.value is the user specified parameter value
+    // err.message is an error message
+
+    // you can check specifically for veto errors with
+    err instanceof veto.ValidationError
 });
 ```
