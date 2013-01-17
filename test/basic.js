@@ -11,7 +11,7 @@ test('setup', function(done) {
     app.use(veto());
 
     app.use(function(req, res) {
-        req.assert('foo').is(/bar/);
+        req.assert('foo', 'should be bar').is(/bar/);
 
         // should no get here
         assert.ok(false);
@@ -31,6 +31,7 @@ test('req', function(done) {
         .send({})
         .expect(400)
         .end(function(err, res) {
+            assert.equal(res.text, 'should be bar');
             done(err);
         });
 });

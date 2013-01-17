@@ -24,6 +24,9 @@ app.get('/', function(req, res, next) {
     // asserts can be chained
     req.assert('foo').isAlpha().len(4, 10);
 
+    // and also accept custom messages
+    req.assert('baz', 'must be a number').isNumeric();
+
     // we can be sure email is of email format
 });
 
