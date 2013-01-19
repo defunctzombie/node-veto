@@ -1,6 +1,6 @@
 {
   "name": "veto",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "middleware to check request parameters",
   "main": "index.js",
   "scripts": {
