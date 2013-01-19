@@ -19,13 +19,13 @@ app.get('/', function(req, res, next) {
 
     // assert that the email parameter is an email
     // will throw a veto.ValidationError if it isn't
-    req.assert('email').isEmail();
+    var email = req.assert('email').isEmail().get();
 
     // asserts can be chained
-    req.assert('foo').isAlpha().len(4, 10);
+    var foo = req.assert('foo').isAlpha().len(4, 10).get();
 
     // and also accept custom messages
-    req.assert('baz', 'must be a number').isNumeric();
+    var baz = req.assert('baz', 'must be a number').isNumeric().get();
 
     // we can be sure email is of email format
 });
@@ -83,7 +83,7 @@ var additional = {
 app.use(veto(additional));
 
 app.get('/', function(req, res) {
-    req.assert('foo').isFooBar();
+    var foo = req.assert('foo').isFooBar().get();
 });
 ```
 
@@ -95,7 +95,7 @@ Veto asserts throw. This means that the error handler middleware will be called 
 app.use(veto());
 
 app.get('/', function(req, res) {
-    req.assert('foo').isEmail();
+    var foo = req.assert('foo').isEmail().get();
 });
 
 // error handler for failed assertions

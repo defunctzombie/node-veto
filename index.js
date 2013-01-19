@@ -41,12 +41,12 @@ var middleware = function(opt) {
             return req.param(name);
         }
 
-        if (this.body && undefined !== this.body[name]) {
-            return this.body[name];
+        if (req.body && undefined !== req.body[name]) {
+            return req.body[name];
         }
 
-        if (this.query && undefined !== this.query[name]) {
-            return this.query[name];
+        if (req.query && undefined !== req.query[name]) {
+            return req.query[name];
         }
 
         return;
@@ -58,6 +58,10 @@ var middleware = function(opt) {
 
             var validator = new Validator();
 
+            validator.get = function() {
+                return this.str;
+            };
+
             validator.error = function(msg) {
                 var err = new ValidationError(msg);
                 err.param = name;
@@ -66,7 +70,7 @@ var middleware = function(opt) {
                 throw err;
             }
 
-            return validator.check(val, msg)
+            return validator.check(val, msg);
         };
 
         next();
