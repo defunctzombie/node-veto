@@ -1,4 +1,4 @@
-# veto [![Build Status](https://secure.travis-ci.org/shtylman/node-veto.png?branch=master)](http://travis-ci.org/shtylman/node-veto) #
+# veto [![Build Status](https://secure.travis-ci.org/defunctzombie/node-veto.png?branch=master)](http://travis-ci.org/defunctzombie/node-veto) #
 
 middleware to validate parameters
 
